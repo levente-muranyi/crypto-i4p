@@ -10,28 +10,34 @@ namespace Crypto
     {
         private static Dictionary<int, char> charSetKV = new Dictionary<int, char>();
         private static Dictionary<char, int> charSetVK = new Dictionary<char, int>();
+        private static List<string> words = new List<string>();
         public Crypter()
         {
-            InitDictKV(charSetKV);
-            InitDictVK(charSetVK);
+            InitDictionaries(charSetKV, charSetVK);
+            InitWordlist(words);
         }
 
-        private void InitDictKV(Dictionary<int, char> dict)
+        private void InitDictionaries(Dictionary<int, char> keyValue, Dictionary<char, int> valueKey)
         {
             for (int i = 0; i <= 25; i++)
             {
-                dict.Add(i, (char)('a' + i));
+                keyValue.Add(i, (char)('a' + i));
+                valueKey.Add((char)('a' + i), i);
             }
-            dict.Add(26, ' ');
+            keyValue.Add(26, ' ');
+            valueKey.Add(' ', 26);
         }
 
-        private void InitDictVK(Dictionary<char, int> dict)
+        private void InitWordlist(List<string> wordlist)
         {
-            for (int i = 0; i <= 25; i++)
+            using (StreamReader reader = new StreamReader("../../../data/words.txt"))
             {
-                dict.Add((char)('a' + i), i);
+                string line;
+                while((line = reader.ReadLine()) != null)
+                {
+                    wordlist.Add(line);
+                }
             }
-            dict.Add(' ', 26);
         }
 
         public string EncryptMessage(string message, string key)
