@@ -14,7 +14,7 @@ namespace Crypto
         [Test]
         [TestCase("helloworld", "abcdefgijkl", "hfnosauzun")]
         [TestCase("stays the same", "aaaaaaaaaaaaaa", "stays the same")]
-        [TestCase("key is shorter", "aa", "key is shorter")]
+        [TestCase("key is shorter", "bb", "lf")]
         [TestCase("not stronger than rsa", "qoamplyoaoanmyhoqrbnxgmrois", "cbtlgdobnuedlqoocqsex")]
         [TestCase("muranyilevente", "anoebnyniuenasg", "mgeeokfymoi tw")]
         public void TestEncryptMessage(string message, string key, string encryptedMessage)
@@ -25,7 +25,7 @@ namespace Crypto
         [Test]
         [TestCase("hfnosauzun", "abcdefgijkl", "helloworld")]
         [TestCase("stays the same", "aaaaaaaaaaaaaa", "stays the same")]
-        [TestCase("key is shorter", "aa", "key is shorter")]
+        [TestCase("lf", "bb", "ke")]
         [TestCase("cbtlgdobnuedlqoocqsex", "qoamplyoaoanmyhoqrbnxgmrois", "not stronger than rsa")]
         [TestCase("mgeeokfymoi tw", "anoebnyniuenasg", "muranyilevente")]
         public void TestDecryptMessage(string encryptedMessage, string key, string decryptedMessage)

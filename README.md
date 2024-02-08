@@ -1,3 +1,4 @@
 # Cryptography Tasks
-### Finished Task 1<br>
-### TODO: Task 2 with unit tests
+## Finished Task 1<br>
+### TODO: Task 2 with unit tests<br>
+### TODO: Add documentation
