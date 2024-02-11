@@ -21,8 +21,8 @@ namespace Crypto
         /// <summary>
         /// Initializes dictionaries for later use.
         /// </summary>
-        /// <param name="keyValue">Dictionary that holds KeyValue pairs. Used for obtaining a char given an integer value.</param>
-        /// <param name="valueKey">Dictionary that holds ValueKey pairs. Used for giving each char an integer value.</param>
+        /// <param name="keyValue">Dictionary that stores KeyValue pairs. Used for obtaining a char given an integer value.</param>
+        /// <param name="valueKey">Dictionary that stores ValueKey pairs. Used for giving each char an integer value.</param>
         private void InitDictionaries(Dictionary<int, char> keyValue, Dictionary<char, int> valueKey)
         {
             for (int i = 0; i <= 25; i++)
@@ -37,7 +37,7 @@ namespace Crypto
         /// <summary>
         /// Initializes the wordlist for later use.
         /// </summary>
-        /// <param name="wordlist">A list which holds English words only.</param>
+        /// <param name="wordlist">A list which stores English words.</param>
         private void InitWordlist(List<string> wordlist)
         {
             using (StreamReader reader = new StreamReader("../../../data/words.txt"))
@@ -89,6 +89,23 @@ namespace Crypto
             }
 
             return decryptedMessage;
+        }
+
+        /// <summary>
+        /// Exploits the fact that both messages were encrypted with the same key. CURRENTLY ONLY WORKS FOR SINGLE WORDS.
+        /// </summary>
+        /// <param name="firstEncryptedMessage"></param>
+        /// <param name="secondEncryptedMessage"></param>
+        /// <param name="wordToTry">An English word from the wordlist.</param>
+        /// <returns>The key which both messages were encrypted with. If either or both of the decrypted words are not found in the wordlist it returns "INVALID_KEY".</returns>
+        public string FindKey(string firstEncryptedMessage, string secondEncryptedMessage, string wordToTry)
+        {
+            string key;
+            if(firstEncryptedMessage.Length > secondEncryptedMessage.Length) key = DecryptMessage(firstEncryptedMessage, wordToTry);
+            else key = DecryptMessage(secondEncryptedMessage, wordToTry);
+
+            if (words.Contains(DecryptMessage(firstEncryptedMessage, key)) && words.Contains(DecryptMessage(secondEncryptedMessage, key))) return key;
+            return "INVALID_KEY";
         }
     }
 }
