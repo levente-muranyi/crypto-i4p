@@ -18,6 +18,11 @@ namespace Crypto
             InitWordlist(words);
         }
 
+        /// <summary>
+        /// Initializes dictionaries for later use.
+        /// </summary>
+        /// <param name="keyValue">Dictionary that holds KeyValue pairs. Used for obtaining a char given an integer value.</param>
+        /// <param name="valueKey">Dictionary that holds ValueKey pairs. Used for giving each char an integer value.</param>
         private void InitDictionaries(Dictionary<int, char> keyValue, Dictionary<char, int> valueKey)
         {
             for (int i = 0; i <= 25; i++)
@@ -29,6 +34,10 @@ namespace Crypto
             valueKey.Add(' ', 26);
         }
 
+        /// <summary>
+        /// Initializes the wordlist for later use.
+        /// </summary>
+        /// <param name="wordlist">A list which holds English words only.</param>
         private void InitWordlist(List<string> wordlist)
         {
             using (StreamReader reader = new StreamReader("../../../data/words.txt"))
@@ -41,6 +50,12 @@ namespace Crypto
             }
         }
 
+        /// <summary>
+        /// Encrypts the message using the given key.
+        /// </summary>
+        /// <param name="message">Message to be encrypted.</param>
+        /// <param name="key">Key used for encryption.</param>
+        /// <returns>The encrypted message which cannot be longer than the length of the <paramref name="key"/>.</returns>
         public string EncryptMessage(string message, string key)
         {
             string encryptedMessage = "";
@@ -55,6 +70,12 @@ namespace Crypto
             return encryptedMessage;
         }
 
+        /// <summary>
+        /// Decrypts the encrypted message using the given key.
+        /// </summary>
+        /// <param name="encryptedMessage">Message to be decrypted.</param>
+        /// <param name="key">Key used for decryption.</param>
+        /// <returns>The decrypted message which cannot be longer than the length of the <paramref name="key"/>.</returns>
         public string DecryptMessage(string encryptedMessage, string key)
         {
             string decryptedMessage = "";
