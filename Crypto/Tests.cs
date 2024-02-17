@@ -31,7 +31,6 @@ namespace Crypto
         public void TestDecryptMessage(string encryptedMessage, string key, string decryptedMessage)
         {
             Assert.That(decryptedMessage, Is.EqualTo(crypt.DecryptMessage(encryptedMessage, key)));
-            crypt.FindKey("npvoubjo", "ijhifs", "mountain");
         }
 
         [Test]
